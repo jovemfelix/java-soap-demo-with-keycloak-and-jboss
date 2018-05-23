@@ -136,31 +136,21 @@ SoapUI > SOAP > Initial WSDL > [http://localhost:8080/CalculadoraWSService?wsdl]
 
 ```
 <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:jax="http://jaxws.ola.jugvale.org/">
-
-   soapenv:Header/
-
-   soapenv:Body
-
-      jax:fazerOp
-
+   <soapenv:Header/>
+   <soapenv:Body>
+      <jax:fazerOp>
          <num1>5</num1>
-
          <num2>2</num2>
-
-         !--Optional:--
-
+         <!--Optional:-->
          <op>+</op>
-
-      /jax:fazerOp
-
-   /soapenv:Body
-
-/soapenv:Envelope
+      </jax:fazerOp>
+   </soapenv:Body>
+</soapenv:Envelope>
 ```
 
 
 
-### Response
+##### Response
 
 ```
 <S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
