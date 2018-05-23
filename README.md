@@ -9,27 +9,26 @@
 
 # How to run
 
-Clone
+### Clone
 
 ```
 git clone https://github.com/swsmile/java-soap-demo
 ```
 
-Inside
+### Inside
 
 ```
 cd java-soap-demo
 ```
 
-Run
+### Run
 
 ```
 mvn package
 mvn embedded-glassfish:run -Dhttp.port=8080
 ```
 
-
-Output
+### Output
 
 ```
 [INFO] Scanning for projects...
@@ -115,20 +114,19 @@ INFO: Deployed calculadora-jax-ws
 Hit ENTER to redeploy, X to exit
 ```
 
-
-Endpoint
+### Endpoint
 
 [http://localhost:8080/CalculadoraWSService](http://localhost:8080/CalculadoraWSService)
 
 ![](doc/endpoint.jpg)
 
-WSDL
+### WSDL
 
 [http://localhost:8080/CalculadoraWSService?wsdl](http://localhost:8080/CalculadoraWSService?wsdl)
 
 ![](doc/wsdl.jpg)
 
-Client
+### Client
 
 SoapUI > SOAP > Initial WSDL > [http://localhost:8080/CalculadoraWSService?wsdl](http://localhost:8080/CalculadoraWSService?wsdl)
 
@@ -137,22 +135,32 @@ SoapUI > SOAP > Initial WSDL > [http://localhost:8080/CalculadoraWSService?wsdl]
 ##### Request
 
 ```
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:jax="http://jaxws.ola.jugvale.org/">
 
+   soapenv:Header/
+
+   soapenv:Body
+
+      jax:fazerOp
+
+         <num1>5</num1>
+
+         <num2>2</num2>
+
+         !--Optional:--
+
+         <op>+</op>
+
+      /jax:fazerOp
+
+   /soapenv:Body
+
+/soapenv:Envelope
 ```
 
-<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:jax="http://jaxws.ola.jugvale.org/">
-   <soapenv:Header/>
-   <soapenv:Body>
-      <jax:fazerOp>
-         <num1>5</num1>
-         <num2>2</num2>
-         <!--Optional:-->
-         <op>+</op>
-      </jax:fazerOp>
-   </soapenv:Body>
-</soapenv:Envelope>
 
-##### Response
+
+### Response
 
 ```
 <S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
