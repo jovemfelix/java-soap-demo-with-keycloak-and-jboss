@@ -25,4 +25,9 @@ public class CalculadoraWS {
 					+ "' não reconhecida. Informa '+', '-', '*' ou '/'.");
 		}
 	}
+
+	@WebMethod
+	public String sayHello(String name){
+    	return "Say Hello to " + name;
+	}
 }
