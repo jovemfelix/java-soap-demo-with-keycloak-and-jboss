@@ -12,13 +12,13 @@
 ### Clone
 
 ```
-git clone https://github.com/swsmile/java-soap-demo
+git clone git@github.com:swsmile/java-soap-demoUsingJaxWS.git
 ```
 
 ### Inside
 
 ```
-cd java-soap-demo
+cd java-soap-demoUsingJaxWS
 ```
 
 ### Run
