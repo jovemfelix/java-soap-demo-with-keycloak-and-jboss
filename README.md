@@ -192,37 +192,40 @@ Hit ENTER to redeploy, X to exit
 ### xsd
 http://localhost:8080/CalculadoraWSService?xsd=1
 ```
+<?xml version="1.0" encoding="utf-8"?>
+
 <!--
  Published by JAX-WS RI (http://jax-ws.java.net). RI's version is Metro/2.3.1-b419 (branches/2.3.1.x-7937; 2014-08-04T08:11:03+0000) JAXWS-RI/2.2.10-b140803.1500 JAXWS-API/2.2.11 JAXB-RI/2.2.10-b140802.1033 JAXB-API/2.2.12-b140109.1041 svn-revision#unknown. 
 -->
-<xs:schema xmlns:tns="http://jaxws.ola.jugvale.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://jaxws.ola.jugvale.org/">
-<xs:element name="fazerOp" type="tns:fazerOp"/>
-<xs:element name="fazerOpResponse" type="tns:fazerOpResponse"/>
-<xs:element name="sayHello" type="tns:sayHello"/>
-<xs:element name="sayHelloResponse" type="tns:sayHelloResponse"/>
-<xs:complexType name="fazerOp">
-<xs:sequence>
-<xs:element name="num1" type="xs:double"/>
-<xs:element name="num2" type="xs:double"/>
-<xs:element name="op" type="xs:string" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-<xs:complexType name="fazerOpResponse">
-<xs:sequence>
-<xs:element name="return" type="xs:double"/>
-</xs:sequence>
-</xs:complexType>
-<xs:complexType name="sayHello">
-<xs:sequence>
-<xs:element name="arg0" type="xs:string" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-<xs:complexType name="sayHelloResponse">
-<xs:sequence>
-<xs:element name="return" type="xs:string" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://jaxws.ola.jugvale.org/" version="1.0" targetNamespace="http://jaxws.ola.jugvale.org/">  
+  <xs:element name="fazerOp" type="tns:fazerOp"/>  
+  <xs:element name="fazerOpResponse" type="tns:fazerOpResponse"/>  
+  <xs:element name="sayHello" type="tns:sayHello"/>  
+  <xs:element name="sayHelloResponse" type="tns:sayHelloResponse"/>  
+  <xs:complexType name="fazerOp"> 
+    <xs:sequence> 
+      <xs:element name="num1" type="xs:double"/>  
+      <xs:element name="num2" type="xs:double"/>  
+      <xs:element name="op" type="xs:string" minOccurs="0"/> 
+    </xs:sequence> 
+  </xs:complexType>  
+  <xs:complexType name="fazerOpResponse"> 
+    <xs:sequence> 
+      <xs:element name="return" type="xs:double"/> 
+    </xs:sequence> 
+  </xs:complexType>  
+  <xs:complexType name="sayHello"> 
+    <xs:sequence> 
+      <xs:element name="arg0" type="xs:string" minOccurs="0"/> 
+    </xs:sequence> 
+  </xs:complexType>  
+  <xs:complexType name="sayHelloResponse"> 
+    <xs:sequence> 
+      <xs:element name="return" type="xs:string" minOccurs="0"/> 
+    </xs:sequence> 
+  </xs:complexType> 
 </xs:schema>
+
 ```
 
 
