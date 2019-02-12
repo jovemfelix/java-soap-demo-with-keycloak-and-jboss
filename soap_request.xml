@@ -1,0 +1,9 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:jax="http://soap.jboss.example.com/">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <jax:sayHello>
+            <!--Optional:-->
+            <arg0>Renato Alves Felix</arg0>
+        </jax:sayHello>
+    </soapenv:Body>
+</soapenv:Envelope>
