@@ -95,5 +95,5 @@ SoapUI > SOAP > Initial WSDL > [http://localhost:8080/demo/CalculatorWS?wsdl](ht
 
 # How to use it on Keycloak
 ```
-git checkout basic-auth-soap-with-keycloak
+git checkout [basic-auth-soap-with-keycloak](https://github.com/jovemfelix/java-soap-demo-with-keycloak-and-jboss/tree/basic-auth-soap-with-keycloak)
 ```
