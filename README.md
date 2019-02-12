@@ -93,3 +93,7 @@ SoapUI > SOAP > Initial WSDL > [http://localhost:8080/demo/CalculatorWS?wsdl](ht
 ![](doc/soapui-math.png)
 ![](doc/soapui-hello.png)
 
+# How to use it on Keycloak
+```
+git checkout basic-auth-soap-with-keycloak
+```
