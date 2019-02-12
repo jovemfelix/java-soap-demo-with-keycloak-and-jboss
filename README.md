@@ -5,95 +5,69 @@ SOAP service demonstration using [JBOSS EAP 7.x or 6.x or Wildfly](https://acces
 
 # Prerequisites
 
-1. [Java](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) 8+
-2. [Maven](https://maven.apache.org) 3+
-3. JBoss EAP-7.2 running on default ports using standalone
-4. Add security-domain for JAAS authentication test Basic Authentication
-5. [Reference for using JBOSS EAP with maven](https://access.redhat.com/documentation/en-us/red_hat_jboss_enterprise_application_platform/7.2/html/development_guide/using_maven_with_eap)
+1. [README.md of master](https://github.com/jovemfelix/java-soap-demo-with-keycloak-and-jboss#master) here gonna have only the differences from a normal project
+2. if nothing is said, it is the default setting 
+3. Need to install at JBOSS the adpater corresponding to [right version](https://access.redhat.com/jbossnetwork/restricted/listSoftware.html?downloadType=distributions&product=core.service.rhsso&version=7.2) 
+3.1. To install it follow the official documentation [https://access.redhat.com/documentation/en-us/red_hat_single_sign-on/7.2/html/securing_applications_and_services_guide/overview#what_are_client_adapters](https://access.redhat.com/documentation/en-us/red_hat_single_sign-on/7.2/html/securing_applications_and_services_guide/overview#what_are_client_adapters)
+3.2 Sample of erro when you dont install the adapter
+![](doc/error-if-not-install-adapter.png)
 
 
-##### Start JBOSS (with defaults) into terminal
+##### Start Keycloak (RH-SSO 7.2) (using port 8180 for not get conflicted with the running EAP)
 ```shell
-sh ${JBOSS_HOME}/bin/standalone.sh
+sh ${RHSSO_HOME}/bin/standalone.sh -Djboss.socket.binding.port-offset=100
 ```
 
-##### Command line to add security-domain, at running JBOSS (run it into another terminal)
-```
-sh ${JBOSS_HOME}/bin/jboss-cli.sh -c --file=${JAVA_SOAP_DEMO_HOME}/config-security-domain.cli
-```
+##### An RH-SSO [http://localhost:8180/auth/admin/master/console](http://localhost:8180/auth/admin/master/console) do:
+1.0 Create a Realm
+![](doc/create-realm.png)
+2.0 With a Client, create it
+![](doc/create-client.png)
+2.1. Add a role to the client
+![](doc/add-role-to-client.png)
+2.1.1. Must have the same name configured at ![web.xml](./src/main/webapp/WEB-INF/web.xml)
+2.2. Disable de Full Scope
+![](doc/disable-full-scope.png)
+2.3. Copy the Installation content to [keycloak.json](/src/main/webapp/WEB-INF/keycloak.json)
+![](doc/copy-installation-to-keycloak_JSON-file.png)
+2.3.1. For the basic communication works you NEED to enable the property `enable-basic-auth` and REMOVE the property `confidential-port 
+![](doc/keycloak-file.png)
+3.0 With a User, create it
+![](doc/create-user.png)
+3.1. Change the user password for ``123``, and disable Temporary
+![](doc/user-password.png)
+3.2. Select Role Mapping from the client created
+![](doc/user-role-mapping-from-client.png)
+![](doc/user-role-mapping-from-client-selected.png)
 
-###### output
-```JSON
-The batch executed successfully
-{
-    "outcome" => "success",
-    "result" => undefined
-}
-```
-
-###### `${JBOSS_HOME}/standalone/configuration/standalone.xml` result 
-   This will read those project files ![users.properties](./src/main/resources/users.properties) and ![roles.properties](./src/main/resources/roles.properties) 
-```XML
-        <subsystem xmlns="urn:jboss:domain:security:2.0">
-            <security-domains>
-...
-                <security-domain name="soap-security-domain">
-                    <authentication>
-                        <login-module code="UsersRoles" flag="required">
-                            <module-option name="usersProperties" value="users.properties"/>
-                            <module-option name="rolesProperties" value="roles.properties"/>
-                            <module-option name="unauthenticatedIdentity" value="nobody"/>
-                        </login-module>
-                    </authentication>
-                </security-domain>
-            </security-domains>
-        </subsystem>
-```
-# How to run JBOSS (run it into another terminal)
-
-Clone
-
-```
-git clone https://github.com/jovemfelix/java-soap-demo-with-keycloak-and-jboss.git
-```
-
-Inside
-
+##### Delete file that is not necessary (because we gonna use RH-SSO configurations)
 ```
 cd java-soap-demo-with-keycloak-and-jboss
+rm -rf ./src/main/webapp/WEB-INF/jboss-web.xml
+rm -rf ./src/main/resources
 ```
-
-Run 
-
+ 
+##### Redeploy the Application with the configurations at ![web.xml](./src/main/webapp/WEB-INF/web.xml) and  [keycloak.json](/src/main/webapp/WEB-INF/keycloak.json) 
 ```
+cd java-soap-demo-with-keycloak-and-jboss
 mvn clean wildfly:deploy
 ```
 
+###### output
+![](doc/redeploy-demo.png)
 
-Output
+##### At the new browser session open [http://localhost:8080/demo/CalculatorWS?wsdl](http://localhost:8080/demo/CalculatorWS?wsdl)
+You will be redirect to RH-SSO login page
+![](doc/rh-sso-login-page.png)
+You should be able to login in using the user `soap` and password `123` that was configured at RH-SSO
 
-```
--------------------------------------------------------
- T E S T S
--------------------------------------------------------
-![](doc/soap-call.png)
-```
+##### Test using shell script like before
+![](doc/same-login-call.png)
 
-
-WSDL
-
-[http://localhost:8080/demo/CalculatorWS?wsdl](http://localhost:8080/demo/CalculatorWS?wsdl)
-
-![](doc/wsdl.png)
-
-Client
+#### Client - Adds authentication information to outgoing request
+![](doc/soap-ui-Adds_authentication_information_to_outgoing_request.png)
 
 SoapUI > SOAP > Initial WSDL > [http://localhost:8080/demo/CalculatorWS?wsdl](http://localhost:8080/demo/CalculatorWS?wsdl)
 
-![](doc/soapui-math.png)
 ![](doc/soapui-hello.png)
-
-# How to use it on Keycloak
-```
-git checkout basic-auth-soap-with-keycloak
-```
+![](doc/soap-ui-call-keycloak.png)
