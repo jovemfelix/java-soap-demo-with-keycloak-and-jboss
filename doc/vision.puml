@@ -1,0 +1,20 @@
+@startuml
+
+title POC - API Credential Management Flow Using Keycloak (RH-SSO)
+
+package "Client - 01" as cli1 {
+    component [soap-call.sh] as app1
+}
+
+cloud Internet {
+}
+
+node "External services offered" as EAP7x {
+    [<<SOAP>> \n API CalculatorWS] as SOAP
+}
+
+app1 -> Internet:\t SOAP + Basic Authentication
+Internet -(0)- EAP7x:- JAAS Authentication
+SOAP -up- EAP7x:SOAP
+
+@enduml

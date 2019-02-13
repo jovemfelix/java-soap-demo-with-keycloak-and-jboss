@@ -1,7 +1,12 @@
 # Java SOAP Service
 
 SOAP service demonstration using [JBOSS EAP 7.x or 6.x or Wildfly](https://access.redhat.com/articles/112673) + [Red Hat Single Sign ON 7.2 - Keycloak 3.4.3](https://access.redhat.com/articles/2342881)
+In this branch will be shown the basic version, that is, a SOAP call with basic authentication.
 
+In this other branch [basic-auth-soap-with-keycloak](https://github.com/jovemfelix/java-soap-demo-with-keycloak-and-jboss/tree/basic-auth-soap-with-keycloak) only what was changed was shown to work in RH-SSO
+
+# Overview
+![](doc/vision.png)
 
 # Prerequisites
 
@@ -70,30 +75,28 @@ mvn clean wildfly:deploy
 ```
 
 
-Output
-
-```
 -------------------------------------------------------
  T E S T S
 -------------------------------------------------------
+
 ![](doc/soap-call.png)
-```
 
-
-WSDL
+###### WSDL
 
 [http://localhost:8080/demo/CalculatorWS?wsdl](http://localhost:8080/demo/CalculatorWS?wsdl)
 
 ![](doc/wsdl.png)
 
-Client
+###### Client
 
 SoapUI > SOAP > Initial WSDL > [http://localhost:8080/demo/CalculatorWS?wsdl](http://localhost:8080/demo/CalculatorWS?wsdl)
 
 ![](doc/soapui-math.png)
 ![](doc/soapui-hello.png)
 
-# How to use it on Keycloak
+# How to use it on Keycloak (see in this branch)
+[basic-auth-soap-with-keycloak](https://github.com/jovemfelix/java-soap-demo-with-keycloak-and-jboss/tree/basic-auth-soap-with-keycloak)
+
 ```
-git checkout [basic-auth-soap-with-keycloak](https://github.com/jovemfelix/java-soap-demo-with-keycloak-and-jboss/tree/basic-auth-soap-with-keycloak)
+git checkout basic-auth-soap-with-keycloak
 ```

@@ -4,7 +4,6 @@ import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
 import java.time.LocalDateTime;
-import javax.annotation.security.RolesAllowed;
 
 @WebService
 public class CalculatorWS {
