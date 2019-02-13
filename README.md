@@ -2,6 +2,8 @@
 
 SOAP service demonstration using [JBOSS EAP 7.x or 6.x or Wildfly](https://access.redhat.com/articles/112673) + [Red Hat Single Sign ON 7.2 - Keycloak 3.4.3](https://access.redhat.com/articles/2342881)
 
+# Overview
+![](doc/vision-keycloak.png)
 
 # Prerequisites
 
