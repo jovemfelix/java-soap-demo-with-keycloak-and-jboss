@@ -1,6 +1,6 @@
 @startuml
 
-title POC - API Credential Management Flow Using Keycloak (RH-SSO)
+title POC - API Credential Management JAAS for Basic Authentication
 
 package "Client - 01" as cli1 {
     component [soap-call.sh] as app1
@@ -9,12 +9,12 @@ package "Client - 01" as cli1 {
 cloud Internet {
 }
 
-node "External services offered" as EAP7x {
+node "External services offered - EAP-7x" as EAP7x {
     [<<SOAP>> \n API CalculatorWS] as SOAP
 }
 
 app1 -> Internet:\t SOAP + Basic Authentication
-Internet -(0)- EAP7x:- JAAS Authentication
+Internet -(0)- EAP7x:- JAAS Authentication (EAP-7x)
 SOAP -up- EAP7x:SOAP
 
 @enduml
